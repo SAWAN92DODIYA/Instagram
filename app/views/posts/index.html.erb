@@ -1,0 +1,6 @@
+<h1><strong> <%= current_user.profile_name %></strong> </h1>
+<p> Post: <%= @posts.count %></p>
+<% @posts.each do |post| %>
+ <%=  image_tag post.image ,:style => "max-height:200px" %>
+<% end %>
+

@@ -1,0 +1,30 @@
+<h1>New Post</h1>
+<%= form_with model: @post  do |form| %>
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+   
+  </div>
+
+  <div>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %><br>
+    
+  </div>
+
+    <div>
+    <%= form.label :image  %><br>
+    <%= form.file_field :image  %><br>
+    
+  </div>
+
+    <div>
+    <%= form.label :pictures %><br>
+    <%= form.file_field :pictures, multiple: true %><br>
+    
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
