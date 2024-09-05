@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
+  
   devise_for :users, controllers: {
         sessions: 'users/sessions'
   }
 
-  
-
   root "home#index"
+  resources :posts
 
   get "up" => "rails/health#show", as: :rails_health_check
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
