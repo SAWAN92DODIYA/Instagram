@@ -1,0 +1,18 @@
+<h1>All user</h1>
+<p>Find me in app/views/home/index.html.erb</p>
+<% user_count= 0 %>
+<% @users.each do |user|%>
+<table>
+  <tr>
+    <th>Count</th>
+    <th>Name</th>
+    <th>ProfileName</th>
+  </tr>
+  <tr>
+    <td><%= user_count += 1 %> </td>
+    <td><%= user.name %></td>
+    <td><%= user.profile_name %></td>
+  </tr>
+  
+  <% end %>
+</table>
