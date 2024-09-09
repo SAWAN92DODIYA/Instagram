@@ -1,11 +1,15 @@
 <h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+
 <p> Post: <%= @posts.count %></p>
 <% @posts.each do |post| %>
+<h4><%= User.find(post.user_id).profile_name %></h4>
 <% if post.image.image? %>
- <%=  image_tag post.image ,:style => "max-height:200px" %>
+ <%=  image_tag post.image ,:style => "max-height:250px" %>
  <% elsif  post.image.video?%>
     <%= video_tag(post.image, controls: true)%>
 <% end %>
+<h4> Likes: <%= post.likes.count %></h4>
+<h4> Comments: <%= post.comments.count %></h4>
+<br>
 
 <% end %>

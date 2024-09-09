@@ -66,3 +66,5 @@ gem "devise", "~> 4.9"
 gem 'byebug'
 gem 'world-flags'
 gem 'cancancan'
+
+gem "noticed", "~> 2.4"

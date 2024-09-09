@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <% if current_user.profile_pic.attached? %>
+      <%= image_tag current_user.profile_pic ,:style => "max-height:200px" %>
+    <% end %>
+    <h1><strong> <%= current_user.profile_name %></strong> </h1>
+    <p> Post: <%= @posts.count %></p>
+    <% @posts.each do |post| %>
+        <% if post.image.image? %>
+           <%= image_tag post.image ,:style => "max-height:200px" %>
+        <% elsif  post.image.video?%>
+           <%= video_tag(post.image, controls: true)%>
+        <% end %>
+    <% end %>
+
+</body>
+</html>
