@@ -2,5 +2,10 @@
 <p>Find me in app/views/home/index.html.erb</p>
 <p> Post: <%= @posts.count %></p>
 <% @posts.each do |post| %>
+<% if post.image.image? %>
  <%=  image_tag post.image ,:style => "max-height:200px" %>
+ <% elsif  post.image.video?%>
+    <%= video_tag(post.image, controls: true)%>
+<% end %>
+
 <% end %>

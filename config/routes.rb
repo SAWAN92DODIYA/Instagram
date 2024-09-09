@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root "home#index"
   resources :posts
   get "home/users" ,to: "home#all_user"
+  get "home" ,to: "home#index"
 
   get "up" => "rails/health#show", as: :rails_health_check
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
