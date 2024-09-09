@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "notifications/index"
   
   devise_for :users, controllers: {
         sessions: 'users/sessions'
@@ -7,6 +8,7 @@ Rails.application.routes.draw do
   root "home#index"
   resources :posts
   get "home/users" ,to: "home#all_user"
+  get "home/my_profile" ,to: "home#user_profile"
   get "home" ,to: "home#index"
 
   get "up" => "rails/health#show", as: :rails_health_check
