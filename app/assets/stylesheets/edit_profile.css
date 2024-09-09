@@ -1,0 +1,27 @@
+#edit_header{
+    display: flex; 
+    justify-content: center; 
+    padding-bottom: 30px;
+    
+}
+
+#edit_border{
+    border-style: outset;
+    border-width: 8px;
+    border-radius: 5px;
+    padding: 8px;
+    height: 600px;
+    width: 450px;
+}
+label{
+    font-size: large;
+ 
+ }
+ #edit_button
+ {
+    display: flex; 
+    justify-content: center; 
+    margin-top: 20px;
+    height: 40px;
+
+ }

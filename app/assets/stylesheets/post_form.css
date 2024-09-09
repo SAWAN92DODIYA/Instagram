@@ -1,0 +1,26 @@
+#post_page{
+    display: flex; 
+    justify-content: center; 
+}
+
+.heding_post_form
+{
+    border-style: outset;
+    border-width: 8px;
+    border-radius: 5px;
+    padding: 8px;
+    height: 450px;
+    width: 400px;
+}
+label{
+   font-size: large;
+
+}
+#submit_button
+{
+    
+    display: flex; 
+    justify-content: center; 
+    margin-top: 20px;
+    height: 40px;
+}
