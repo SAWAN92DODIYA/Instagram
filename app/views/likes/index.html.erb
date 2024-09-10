@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+    <div>
+        <div>
+            <h1> <%= "Likes: #{@likes.count}"%> </h1>
+            <ul>
+            <% @likes.each do |like| %>
+                <li>
+                <%= User.find(like.user_id).profile_name  %>
+                </li>
+            <% end %>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
