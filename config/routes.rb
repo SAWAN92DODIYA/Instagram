@@ -1,12 +1,18 @@
 Rails.application.routes.draw do
+  
   get "notifications/index"
   
   devise_for :users, controllers: {
         sessions: 'users/sessions'
   }
 
+  resources :posts do
+    resources :likes, only: [:create, :index ] 
+  end
+ 
+
   root "home#index"
-  resources :posts
+  
   get "home/users" ,to: "home#all_user"
   get "home/my_profile" ,to: "home#user_profile"
   get "home" ,to: "home#index"
@@ -16,3 +22,5 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   
 end
+
+

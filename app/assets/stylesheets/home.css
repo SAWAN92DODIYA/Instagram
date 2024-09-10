@@ -1,0 +1,21 @@
+
+#parent_div
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-image: repeating-linear-gradient(rgb(248, 89, 89), rgb(252, 252, 126) 10%, rgb(148, 242, 148) 20%); */
+
+
+}
+#child_div
+{
+    border-style: groove;
+}
+#profile_pic 
+{
+    border-style: outset;
+    border-width: 5px;
+    border-radius: 3px;
+    width: 84px;
+}

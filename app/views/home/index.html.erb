@@ -1,15 +1,49 @@
-<h1>Home#index</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+    <%= stylesheet_link_tag "home" %>
+</head>
+<body>
 
-<p> Post: <%= @posts.count %></p>
-<% @posts.each do |post| %>
-<h4><%= User.find(post.user_id).profile_name %></h4>
-<% if post.image.image? %>
- <%=  image_tag post.image ,:style => "max-height:250px" %>
- <% elsif  post.image.video?%>
-    <%= video_tag(post.image, controls: true)%>
-<% end %>
-<h4> Likes: <%= post.likes.count %></h4>
-<h4> Comments: <%= post.comments.count %></h4>
-<br>
+    <div id = "parent_div">
+         <div id = "child_div">
+            
+            <% @posts.each do |post| %>
+                <div id = "profile_pic">
+                    <% if User.find(post.user_id).profile_pic.attached? %>
+                        <%= image_tag User.find(post.user_id).profile_pic ,:style => "max-height:50px" %>
+                    <% end %>
+                </div>
+              
+                <h4><%= User.find(post.user_id).profile_name %></h4>
+                <% if post.image.image? %>
+                <%=  image_tag post.image ,:style => "max-height:400px" %>
+                <% elsif  post.image.video?%>
+                    <%= video_tag(post.image, controls: true)%>
+                <% end %>
 
-<% end %>
+                <h4>
+                    <% like = current_user.likes.find_by(post: post) %>
+
+                    <% if like && like.like %>
+                        <%= button_to 'Unlike', post_likes_path(post),data: { turbo_method: "post" }%>
+                    <% else %>
+                        
+                        <%= button_to 'Like', post_likes_path(post),data: { turbo_method: "post" }%>
+                    <% end %>
+
+                    
+                    <%= link_to " Likes: #{post.likes.where(like: true).count}", post_likes_path(post),data: { turbo_method: "get" }%>   
+                </h4>
+
+
+                <h4> Comments: <%= post.comments.count %></h4>
+                <br>
+
+            <% end %>
+
+         </div>
+     </div>
+</body>
+</html>
