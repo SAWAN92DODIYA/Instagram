@@ -37,8 +37,20 @@
                     <%= link_to " Likes: #{post.likes.where(like: true).count}", post_likes_path(post),data: { turbo_method: "get" }%>   
                 </h4>
 
-
-                <h4> Comments: <%= post.comments.count %></h4>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                       Create Comment
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                        
+                        <%= form_with model: [post, post.comments.build]  do |form| %>
+                         <li> <%= form.text_field :body  %> </li>
+                         <li><hr class="dropdown-divider"></li>
+                         <li><%= form.submit %> </li>
+                         <% end %>
+                    </ul>
+                    </div>
+                    <h4><%= link_to " Comments: #{post.comments.count}", post_comments_path(post),data: { turbo_method: "get" }%>  </h4>
                 <br>
 
             <% end %>

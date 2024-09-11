@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<%= stylesheet_link_tag "all_comments" %>
+</head>
+<body>
+    <div id= "parent_id">
+         <div id= "child_id">
+                
+                <h1> <b>Comments</b></h1>
+                <div>
+                <% @comments.each do |comment|%>
+                    <h3><%=User.find(comment.user_id).profile_name %></h3>
+                <% end %> 
+                </div>
+        </div>
+    </div>
+</body>
+</html>

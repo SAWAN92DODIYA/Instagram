@@ -1,0 +1,13 @@
+#parent_id{
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    
+}
+#child_id
+{
+    border-style: outset;
+    padding: 10px;
+    border-width: 5px;
+    border-radius: 3px;
+}

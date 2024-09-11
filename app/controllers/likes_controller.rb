@@ -8,6 +8,7 @@ class LikesController < ApplicationController
     end 
 
     def create
+      
       post = Post.find(params[:post_id])
       like = current_user.likes.find_or_initialize_by(post: post)
       like.like = !like.like
