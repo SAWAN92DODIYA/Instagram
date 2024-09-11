@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   
+  get "comments/show"
+  get "comments/edit"
+  get "comments/update"
+  get "comments/destroy"
+  
   get "notifications/index"
   
   devise_for :users, controllers: {
@@ -7,9 +12,11 @@ Rails.application.routes.draw do
   }
 
   resources :posts do
+    resources :comments, only: [:index, :create]
     resources :likes, only: [:create, :index ] 
   end
  
+  
 
   root "home#index"
   
