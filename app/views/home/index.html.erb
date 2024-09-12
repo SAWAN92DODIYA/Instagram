@@ -50,7 +50,15 @@
                          <% end %>
                     </ul>
                     </div>
-                    <h4><%= link_to " Comments: #{post.comments.count}", post_comments_path(post),data: { turbo_method: "get" }%>  </h4>
+                    <h4><%= link_to "Comments: #{post.comments.count}", post_comments_path(post),data: { turbo_method: "get" }%>  </h4>
+                 <% unless current_user.id == post.user.id %>
+                    <% if current_user.following?(User.find(post.user.id)) %>
+                      <%= link_to 'Unfollow', destroy_followed_user_follows_path(user_id: post.user.id), remote: true, data: { turbo_method: :delete} %>
+                    <% else %>
+                    <%= link_to 'Follow', create_followed_user_follows_path(user_id: post.user.id), remote: true, data: { turbo_method: :post } %>
+                    <% end %>
+                <% end %>
+                   
                 <br>
 
             <% end %>

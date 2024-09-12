@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  
   get "comments/show"
   get "comments/edit"
   get "comments/update"
@@ -15,7 +16,19 @@ Rails.application.routes.draw do
     resources :comments, only: [:index, :create]
     resources :likes, only: [:create, :index ] 
   end
+
  
+ 
+  resources :users, only: [:index, :show] do
+    resources :follows, only: [] do
+      collection do
+        get :all_followers
+        get :all_followed
+        post :create_followed
+        delete :destroy_followed
+      end
+    end
+  end
   
 
   root "home#index"
