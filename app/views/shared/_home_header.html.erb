@@ -49,10 +49,21 @@
                         </li>
                         
                     </ul>
+                   <%= form_with url: search_users_path, method: :get  do |form| %>
+                        <div>
+                        <%= form.label :title %><br>
+                        <%= form.text_field :title %>
+                        </div>
+                         <div id="submit_button">
+                        <%= form.submit "Serach"%>
+                        </div>
+                    <% end %>
+
                     <span class="navbar-text">
                     
                     </span>
                 </div>
+               
             </div>
         </nav>
     </body>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Title of the document</title>
+</head>
+
+<body>
+    <div>
+        <div>
+            <% if @users.present? %>
+                <% @users.each do |user|%>
+                <div>
+                <% if user.profile_pic.attached? %>
+                        <%= image_tag user.profile_pic ,:style => "max-height:50px" %>
+                <% end %>
+                </div>
+                <div>
+                    <h3><%= user.profile_name %></h3>
+                </div>
+                <% end %>
+            <% else%>
+                <h3><%= flash[:errors]%></h3>
+            <% end %>
+        </div>
+    </div>
+</body>
+
+</html>

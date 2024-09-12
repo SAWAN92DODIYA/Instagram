@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   
 
   root "home#index"
+  get "search/users" ,to: "home#search_user"
   
   get "home/users" ,to: "home#all_user"
   get "home/my_profile" ,to: "home#user_profile"

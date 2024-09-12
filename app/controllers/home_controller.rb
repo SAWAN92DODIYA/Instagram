@@ -16,5 +16,13 @@ class HomeController < ApplicationController
     @posts = @user.posts.all
   end
 
+  def search_user
+    if params[:title].present?
+      @users = User.where("profile_name Like ?", "%#{params[:title]}%")
+     else
+        flash[:errors] = " We Couldn't find your request."
+    end 
+  end 
+
  
 end 
