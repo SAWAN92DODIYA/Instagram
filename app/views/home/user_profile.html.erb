@@ -10,6 +10,10 @@
          <%= image_tag current_user.profile_pic ,:style => "max-height:50px" %>
      <% end %>
      <h1><strong> <%= current_user.profile_name %></strong> </h1>
+      <h1><strong> Followers: <%= current_user.active_relationships.count %></strong> </h1>
+          <%= link_to "Followers: #{current_user.followers.count}", all_followers_user_follows_path(current_user) %>
+          <%= link_to "Following: #{current_user.followings.count}", all_followed_user_follows_path(current_user) %>
+       
 
     <div id = "parent_div">
          <div id = "child_div">
