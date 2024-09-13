@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
+  # get "messages/index"
+  # get "messages/new"
+  # get "messages/create"
+  # get "conversations/index"
+  # get "conversations/create"
   get "saved_posts/index"
   get "saved_posts/show"
-  # get "saved_posts/create"
+  
   get "saved_posts/destroy"
   
   
@@ -34,6 +39,10 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :conversations,only: [:index, :new, :create] do
+    resources :messages ,only: [:index, :create]
+   end
   
 
   root "home#index"
