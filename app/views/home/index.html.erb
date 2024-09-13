@@ -15,12 +15,20 @@
                         <%= image_tag User.find(post.user_id).profile_pic ,:style => "max-height:50px" %>
                     <% end %>
                 </div>
-              
-                <h4><%= User.find(post.user_id).profile_name %></h4>
+
+            <h4><%= User.find(post.user_id).profile_name %></h4>
                 <% if post.image.image? %>
                 <%=  image_tag post.image ,:style => "max-height:400px" %>
                 <% elsif  post.image.video?%>
                     <%= video_tag(post.image, controls: true)%>
+                <% end %>
+
+                <% post.pictures.each do |picture|%>
+                    <% if picture.image? %>
+                    <%=  image_tag picture ,:style => "max-height:400px" %>
+                    <% elsif  picture.video?%>
+                        <%= video_tag(picture, controls: true)%>
+                    <% end %>
                 <% end %>
 
                 <h4>

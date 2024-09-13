@@ -20,7 +20,7 @@ class HomeController < ApplicationController
     if params[:title].present?
       @users = User.where("profile_name Like ?", "%#{params[:title]}%")
      else
-        flash[:errors] = " We Couldn't find your request."
+        flash[:errors] = "We Couldn't find your request."
     end 
   end 
 
