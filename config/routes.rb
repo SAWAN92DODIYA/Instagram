@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "saved_posts/index"
+  get "saved_posts/show"
+  # get "saved_posts/create"
+  get "saved_posts/destroy"
   
   
   get "comments/show"
@@ -15,6 +19,7 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments, only: [:index, :create]
     resources :likes, only: [:create, :index ] 
+    resource :saved_posts,  only: [:create]
   end
 
  

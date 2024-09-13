@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments
   has_many :likes
-  has_many :saved_posts
+  has_many :saved_posts,dependent: :destroy
   has_many :notifications, as: :recipient, dependent: :destroy, class_name: "Noticed::Notification"
   has_many :notification_mentions, as: :record, dependent: :destroy, class_name: "Noticed::Event"
 
@@ -18,6 +18,8 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name: 'Follow', foreign_key: 'followed_id', dependent: :destroy,
    inverse_of: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+
+  
 
 
 

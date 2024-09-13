@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Title of the document</title>
+</head>
+
+<body>
+    <h1>SavedPosts </h1>
+
+        <% @saved_posts.each do |post| %>
+            <div class="post">
+                <h3><%= post.title %></h3>
+                <% if post.image.image? %>
+                    <%=  image_tag post.image ,:style => "max-height:400px" %>
+                <% elsif  post.image.video?%>
+                    <%= video_tag(post.image, controls: true)%>
+                <% end %>
+
+                <p><%= post.body %></p>
+            </div>
+        <% end %>
+
+</body>
+
+</html>
