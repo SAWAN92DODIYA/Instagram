@@ -2,21 +2,30 @@
 <html>
 <head>
 <title>Page Title</title>
+ <%= stylesheet_link_tag 'all_likes' %>
 </head>
 <body>
 
-    <div>
-        <div>
-            <h1> <%= "Likes: #{@likes.count}"%> </h1>
-            <ul>
+     <div id="parent_id">
+        <div id="child_id">
+            <h1>Likes: <%= @likes.count %></h1>
             <% @likes.each do |like| %>
-                <li>
-                <%= User.find(like.user_id).profile_name  %>
-                </li>
+                <div class="profile-container">
+                    <div id="profile_pic">
+                        <% if User.find(like.user_id).profile_pic.attached? %>
+                            <%= image_tag User.find(like.user_id).profile_pic, class: "profile-pic" %>
+                        <% end %>
+                    </div>
+                    <h4 id="profile_name"><%= User.find(like.user_id).profile_name %></h4>
+                </div>
             <% end %>
-            </ul>
         </div>
     </div>
 
 </body>
 </html>
+                       
+
+
+               
+            

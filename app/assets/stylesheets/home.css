@@ -1,21 +1,67 @@
-
-#parent_div
-{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* background-image: repeating-linear-gradient(rgb(248, 89, 89), rgb(252, 252, 126) 10%, rgb(148, 242, 148) 20%); */
-
-
+#parent_div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-#child_div
-{
-    border-style: groove;
+
+#child_div {
+  border-style: groove;
 }
-#profile_pic 
-{
-    border-style: outset;
-    border-width: 5px;
-    border-radius: 3px;
-    width: 84px;
+
+.column {
+  float: left;
+  width: 33%;
+  padding: 5px;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.mySlides {
+  display: none;
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.w3-button {
+  cursor: pointer;
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-pic {
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  padding: 3px;
+  border: 1.5px solid transparent;
+  background: linear-gradient(to right, red, orange, lightpink);
+  background-clip: border-box;
+}
+
+#profile_name {
+  margin: 0;
+  font-size: 24px;
+}
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.custom-hr {
+  border: none;
+  border-top: 2px solid black;
+  width: 100%;
+  margin: 10px 0;
 }

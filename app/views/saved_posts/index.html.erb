@@ -1,25 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Title of the document</title>
+    <title>Saved Posts</title>
+    <%= stylesheet_link_tag 'save_posts' %>
+    <%= javascript_include_tag 'slideshow' %>
 </head>
-
 <body>
-    <h1>SavedPosts </h1>
+    <h1>Saved Posts</h1>
 
-        <% @saved_posts.each do |post| %>
-            <div class="post">
-                <h3><%= post.title %></h3>
-                <% if post.image.image? %>
-                    <%=  image_tag post.image ,:style => "max-height:400px" %>
-                <% elsif  post.image.video?%>
-                    <%= video_tag(post.image, controls: true)%>
-                <% end %>
+    <div class="posts-container">
+        <% @posts.each do |post| %>
+            <div class="post-card">
+                
+                <div class="post-image-container">
+                    <% if post.image.image? %>
+                        <%= image_tag post.image, class: 'post-image' %>
+                    <% elsif post.image.video? %>
+                        <%= video_tag(post.image, controls: true, class: 'post-video') %>
+                    <% end %>
+                </div>
 
-                <p><%= post.body %></p>
+                <div class="post-slideshow">
+                    <% post.pictures.each_with_index do |picture, index| %>
+                        <% if picture.image? %>
+                            <img class="mySlides" src="<%= url_for(picture) %>" />
+                        <% end %>
+                    <% end %>
+
+                    <% if post.pictures.count > 1 %>
+                        <button class="w3-button w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                        <button class="w3-button w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+                    <% end %>
+                </div>
+
+                <%= link_to "Delete Post", post_saved_posts_path(post), data: { turbo_method: :delete }, class: 'delete-button' %>
             </div>
         <% end %>
+    </div>
 
 </body>
-
 </html>

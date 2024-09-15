@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
-  # get "messages/index"
-  # get "messages/new"
-  # get "messages/create"
-  # get "conversations/index"
-  # get "conversations/create"
+
   get "saved_posts/index"
   get "saved_posts/show"
   
@@ -13,7 +9,7 @@ Rails.application.routes.draw do
   get "comments/show"
   get "comments/edit"
   get "comments/update"
-  get "comments/destroy"
+ 
   
   get "notifications/index"
   
@@ -24,7 +20,7 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments, only: [:index, :create]
     resources :likes, only: [:create, :index ] 
-    resource :saved_posts,  only: [:create]
+    resource :saved_posts,  only: [:create,:destroy]
   end
 
  
@@ -43,6 +39,8 @@ Rails.application.routes.draw do
   resources :conversations,only: [:index, :new, :create] do
     resources :messages ,only: [:index, :create]
    end
+  
+
   
 
   root "home#index"

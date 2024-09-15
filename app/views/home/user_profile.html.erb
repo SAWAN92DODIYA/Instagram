@@ -3,56 +3,79 @@
 <head>
     <title>Page Title</title>
     <%= stylesheet_link_tag "home" %>
+    <%= javascript_include_tag 'slideshow' %>
 </head>
 <body>
 
-     <% if current_user.profile_pic.attached? %>
-         <%= image_tag current_user.profile_pic ,:style => "max-height:50px" %>
-     <% end %>
-     <h1><strong> <%= current_user.profile_name %></strong> </h1>
-      <h1><strong> Followers: <%= current_user.active_relationships.count %></strong> </h1>
-          <%= link_to "Followers: #{current_user.followers.count}", all_followers_user_follows_path(current_user) %>
-          <%= link_to "Following: #{current_user.followings.count}", all_followed_user_follows_path(current_user) %>
-       
+    <div class="profile-container">
+        <div id="profile_pic">
+            <% if current_user.profile_pic.attached? %>
+                <%= image_tag current_user.profile_pic, class: "profile-pic" %>
+            <% end %>
+        </div>
+        <h1 id="profile_name"><%= current_user.profile_name %></h1>
+    </div>
+    
+    <%= link_to "Followers: #{current_user.followers.count}", all_followers_user_follows_path(current_user) %>
+    <%= link_to "Following: #{current_user.followings.count}", all_followed_user_follows_path(current_user) %>
 
-    <div id = "parent_div">
-         <div id = "child_div">
+    <div id="parent_div">
+        <div id="child_div">
 
-             <% @posts.each do |post| %>
-                <div id = "profile_pic">
-                    <% if User.find(post.user_id).profile_pic.attached? %>
-                        <%= image_tag User.find(post.user_id).profile_pic ,:style => "max-height:50px" %>
-                    <% end %>
-                </div>
-              
-                <h4><%= User.find(post.user_id).profile_name %></h4>
+            <% @posts.each do |post| %>
+                
                 <% if post.image.image? %>
-                <%=  image_tag post.image ,:style => "max-height:400px" %>
-                <% elsif  post.image.video?%>
-                    <%= video_tag(post.image, controls: true)%>
+                    <%= image_tag post.image, style: "max-height:400px; width:100%"%>
+                <% elsif post.image.video? %>
+                    <%= video_tag post.image, controls: true %>
                 <% end %>
 
-                <h4>
-                    <% like = current_user.likes.find_by(post: post) %>
-
-                    <% if like && like.like %>
-                        <%= button_to 'Unlike', post_likes_path(post),data: { turbo_method: "post" }%>
-                    <% else %>
-                        
-                        <%= button_to 'Like', post_likes_path(post),data: { turbo_method: "post" }%>
+                <div class="w3-content w3-display-container">
+                    <% post.pictures.each_with_index do |picture, index| %>
+                        <% if picture.image? %>
+                            <img class="mySlides" src="<%= url_for(picture) %>" style="width:100%; display:none;" />
+                        <% end %>
                     <% end %>
 
-                    
-                    <%= link_to " Likes: #{post.likes.where(like: true).count}", post_likes_path(post),data: { turbo_method: "get" }%>   
+                    <% if post.pictures.count > 1 %> 
+                        <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                        <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+                    <% end %>
+                </div>
+             <div class="post-actions">
+                <h4>
+                    <% like = current_user.likes.find_by(post: post) %>
+                    <% if like && like.like %>
+                        <%= button_to 'Unlike', post_likes_path(post), data: { turbo_method: "post" } %>
+                    <% else %>
+                        <%= button_to 'Like', post_likes_path(post), data: { turbo_method: "post" } %>
+                    <% end %>
+
+                    <%= link_to "Likes: #{post.likes.where(like: true).count}", post_likes_path(post), data: { turbo_method: "get" } %>
                 </h4>
 
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                        Create Comment
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                        <%= form_with model: [post, post.comments.build] do |form| %>
+                            <li><%= form.text_field :body %></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><%= form.submit %></li>
+                        <% end %>
+                    </ul>
+                </div>
 
-                <h4> Comments: <%= post.comments.count %></h4>
-                <br>
+                <h4><%= link_to "Comments: #{post.comments.count}", post_comments_path(post), data: { turbo_method: "get" } %></h4>
+                
+                </div>
+                 <hr class="custom-hr">
 
             <% end %>
 
-         </div>
-     </div>
+        </div>
+    </div>
+
 </body>
 </html>

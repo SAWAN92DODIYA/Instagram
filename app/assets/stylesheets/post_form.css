@@ -1,26 +1,45 @@
-#post_page{
-    display: flex; 
-    justify-content: center; 
+#post_page {
+    display: flex;
+    justify-content: center;
 }
 
-.heding_post_form
-{
-    border-style: outset;
+.heding_post_form {
     border-width: 8px;
+    border-style: solid;
     border-radius: 5px;
     padding: 8px;
     height: 450px;
     width: 400px;
+    border-image: linear-gradient(to right, red, orange, lightpink) 1;
+    background-color: white;
 }
-label{
-   font-size: large;
 
+label {
+    font-size: large;
 }
-#submit_button
-{
-    
-    display: flex; 
-    justify-content: center; 
+
+#submit_button {
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
     height: 40px;
+}
+
+#submit_button input[type="submit"] {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: medium;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#submit_button input[type="submit"]:hover {
+    background-color: darkred;
+}
+
+button, input[type="submit"] {
+    border-radius: 4px;
+    font-size: 16px;
 }

@@ -6,7 +6,6 @@
     background-color: #f9f9f9; 
 }
 
-
 #child_id {
     border-width: 5px;
     border-style: solid;
@@ -17,13 +16,11 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
 .profile-container {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
 }
-
 
 #profile_pic img.profile-pic {
     border-radius: 50%;
@@ -38,7 +35,6 @@
     font-weight: bold;
     color: #333;
 }
-
 
 p {
     font-size: 14px;

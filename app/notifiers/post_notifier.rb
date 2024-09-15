@@ -1,10 +1,7 @@
-# To deliver this notification:
-#
-# PostNotifier.with(record: @post, message: "New post").deliver(User.all)
-
 class PostNotifier < ApplicationNotifier
-  # Add your delivery methods
-  #
+  
+  
+
   deliver_by :email do |config|
     config.mailer = "UserMailer"
     config.method = "new_post"
@@ -21,6 +18,21 @@ class PostNotifier < ApplicationNotifier
       " #{recipient.profile_name} Add New Post  :  #{params[:foo]}" 
     end 
   end 
+
+  # deliver_by :database
+
+  # param :post, :commenter
+
+  # def message
+  #   "#{params[:commenter].profile_name} commented on your post."
+  # end
+
+  # def url
+  #   post_path(params[:post])
+  # end
+
+
+
   #
   # bulk_deliver_by :slack do |config|
   #   config.url = -> { Rails.application.credentials.slack_webhook_url }

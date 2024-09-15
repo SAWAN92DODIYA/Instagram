@@ -1,6 +1,6 @@
 class SavedPostsController < ApplicationController
   def index
-    @saved_posts = current_user.saved_posts.includes(:post).map(&:post) 
+    @posts = current_user.saved_posts.includes(:post).map(&:post) 
   end
 
   def show
@@ -13,5 +13,12 @@ class SavedPostsController < ApplicationController
   end
 
   def destroy
+    if params[:post_id].present?
+
+      @post = SavedPost.find_by(post_id: params[:post_id])
+      @post.destroy
+    end 
+    redirect_to saved_posts_index_path 
+
   end
 end

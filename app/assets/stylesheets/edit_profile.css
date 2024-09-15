@@ -1,27 +1,44 @@
-#edit_header{
+#edit_header {
     display: flex; 
     justify-content: center; 
     padding-bottom: 30px;
-    
 }
 
-#edit_border{
-    border-style: outset;
+#edit_border {
+    border-style: solid;
     border-width: 8px;
     border-radius: 5px;
     padding: 8px;
     height: 600px;
     width: 450px;
+    border-image: linear-gradient(to right, red, orange, lightpink) 1;
+    background-color: white;
 }
-label{
-    font-size: large;
- 
- }
- #edit_button
- {
-    display: flex; 
-    justify-content: center; 
-    margin-top: 20px;
-    height: 40px;
 
- }
+label {
+    font-size: large;
+}
+
+#edit_button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#edit_button input[type="submit"] {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: medium;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#edit_button input[type="submit"]:hover {
+    background-color: darkred;
+}
+
+button, input[type="submit"] {
+    border-radius: 4px;
+    font-size: 16px;
+}
