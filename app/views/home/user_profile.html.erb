@@ -68,7 +68,8 @@
                 </div>
 
                 <h4><%= link_to "Comments: #{post.comments.count}", post_comments_path(post), data: { turbo_method: "get" } %></h4>
-                
+               <%= button_to 'Delete', post_path(post), method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+
                 </div>
                  <hr class="custom-hr">
 

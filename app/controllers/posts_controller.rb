@@ -31,6 +31,10 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    
+   if @post.destroy!
+    redirect_to home_my_profile_path
+   end
   end
 
   private 

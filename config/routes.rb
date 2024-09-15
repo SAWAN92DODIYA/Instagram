@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "saved_posts/index"
   get "saved_posts/show"
   
-  get "saved_posts/destroy"
+
   
   
   get "comments/show"
