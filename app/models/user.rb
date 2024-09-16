@@ -12,7 +12,11 @@ class User < ApplicationRecord
   has_many :followings, through: :active_relationships, source: :followed
   has_many :passive_relationships, class_name: 'Follow', foreign_key: 'followed_id', dependent: :destroy,inverse_of: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+  validates :name ,presence: true
+  validates :profile_name,presence: true, uniqueness: true
   
+
+
   def follow(user)
     active_relationships.create(followed_id: user.id)
   end
@@ -28,11 +32,11 @@ class User < ApplicationRecord
 
   
   def self.ransackable_attributes(_auth_object = nil)
-    %w[name email] # Allow searching by name and email
+    %w[name email] 
   end
   
   def self.ransackable_associations(_auth_object = nil)
-    [] # We don't have any searchable associations in this case
+    [] 
   end
  
 
