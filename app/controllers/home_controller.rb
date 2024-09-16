@@ -11,12 +11,13 @@ class HomeController < ApplicationController
   
   def user_profile 
     @user = User.find(current_user.id)
-    @posts = @user.posts.all
+    @posts = @user.posts.all.order(created_at: :desc)
   end
 
   def search_user
     if params[:title].present?
       @users = User.where("profile_name Like ?", "%#{params[:title]}%")
+      @posts = Post.where("body Like ?", "%#{params[:title]}%")
      else
         flash[:errors] = "We Couldn't find your request."
     end 

@@ -2,25 +2,17 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
+  root "home#index"
   get "saved_posts/index"
-  get "saved_posts/show"
-  
 
-  
-  
-  get "comments/show"
-  get "comments/edit"
-  get "comments/update"
- 
-  
-  get "notifications/index"
+  resources :notifications ,only: [:index]
   
   devise_for :users, controllers: {
         sessions: 'users/sessions'
   }
 
   resources :posts do
-    resources :comments, only: [:index, :create]
+    resources :comments, only: [:index, :create,:destroy]
     resources :likes, only: [:create, :index ] 
     resource :saved_posts,  only: [:create,:destroy]
   end
@@ -45,12 +37,13 @@ Rails.application.routes.draw do
 
   
 
-  root "home#index"
+  
   get "search/users" ,to: "home#search_user"
   
   
   get "home/my_profile" ,to: "home#user_profile"
   get "home" ,to: "home#index"
+  
 
   get "up" => "rails/health#show", as: :rails_health_check
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
