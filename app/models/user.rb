@@ -15,7 +15,13 @@ class User < ApplicationRecord
   validates :name ,presence: true
   validates :profile_name,presence: true, uniqueness: true
   
+  after_create :send_admin_mail
 
+  def send_admin_mail
+   
+    UserMailer.welcome_email(self).deliver_now
+    
+  end
 
   def follow(user)
     active_relationships.create(followed_id: user.id)
