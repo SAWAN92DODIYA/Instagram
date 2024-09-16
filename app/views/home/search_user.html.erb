@@ -2,21 +2,35 @@
 <html>
 <head>
 <title>Title of the document</title>
+  <%= stylesheet_link_tag "home" %>
 </head>
 <body>
     <div>
         <div>
             <% if @users.present? %>
+              <ul>
                 <% @users.each do |user|%>
-                <div>
-                <% if user.profile_pic.attached? %>
-                        <%= image_tag user.profile_pic ,:style => "max-height:50px" %>
+                  <li>
+                    <div class="profile-container">
+                    <div id="profile_pic">
+                        <% if user.profile_pic.attached? %>
+                            <%= image_tag user.profile_pic, class: "profile-pic" %>
+                        <% end %>
+                    </div>
+
+                    <h1 id="profile_name"><%= user.profile_name %></h1>
+                    <% unless current_user == user %>
+                        <% if current_user.following?(user) %>
+                            <%= link_to 'Unfollow', destroy_followed_user_follows_path(user_id: user.id), remote: true, data: { turbo_method: :delete }, class: "action-link" %>
+                        <% else %>
+                            <%= link_to 'Follow', create_followed_user_follows_path(user_id: user.id), remote: true, data: { turbo_method: :post }, class: "action-link" %>
+                        <% end %>
+                    <% end %>
+
+                    </div>
+                      </li>
                 <% end %>
-                </div>
-                <div>
-                    <h3><%= user.profile_name %></h3>
-                </div>
-                <% end %>
+                 </ul>
             <% else%>
                 <h3><%= flash[:errors]%></h3>
             <% end %>
@@ -25,3 +39,7 @@
 </body>
 
 </html>
+
+
+
+ 

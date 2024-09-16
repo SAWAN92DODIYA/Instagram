@@ -2,14 +2,12 @@ class HomeController < ApplicationController
   before_action :authenticate_user!
 
   def index
-   @posts = Post.order(created_at: :desc)
+    user_ids = current_user.followings.pluck(:id) + current_user.followers.pluck(:id)
+    user_ids << current_user.id
+    @posts = Post.where(user_id: user_ids).order(created_at: :desc)
   end
 
-  def all_user
-    authorize! :all_user, User
-    @users = User.where.not(id: current_user.id )
-    
-  end 
+ 
   
   def user_profile 
     @user = User.find(current_user.id)
