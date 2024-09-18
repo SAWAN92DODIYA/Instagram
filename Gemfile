@@ -71,3 +71,7 @@ gem 'cancancan'
 gem "noticed", "~> 2.4"
 gem 'activeadmin', '~> 3.2.0'
 gem 'sassc'
+
+gem "omniauth"
+gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection"
