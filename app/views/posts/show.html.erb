@@ -1,6 +1,0 @@
-<% if @post.image.image? %>
- <%=  image_tag @post.image ,:style => "max-height:200px" %>
- <% elsif  @post.image.video?%>
-    <%= video_tag(@post.image, controls: true,:style => "max-height:200px")%>
-<% end %>
-

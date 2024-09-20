@@ -23,7 +23,8 @@
         <div id="child_div">
 
             <% @posts.each do |post| %>
-                
+
+                <h2>  <%= post.title %></h2>
                 <% if post.image.image? %>
                     <%= image_tag post.image, style: "max-height:400px; width:100%"%>
                 <% elsif post.image.video? %>
@@ -42,6 +43,7 @@
                         <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
                     <% end %>
                 </div>
+                <p> <%= post.body %></p>
              <div class="post-actions">
                 <h4>
                     <% like = current_user.likes.find_by(post: post) %>
@@ -69,6 +71,7 @@
 
                 <h4><%= link_to "Comments: #{post.comments.count}", post_comments_path(post), data: { turbo_method: "get" } %></h4>
                <%= button_to 'Delete', post_path(post), method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+             
 
                 </div>
                  <hr class="custom-hr">

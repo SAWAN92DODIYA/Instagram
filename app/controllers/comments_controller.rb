@@ -14,11 +14,7 @@ class CommentsController < ApplicationController
       redirect_to root_path, alert: 'There was an error saving your comment.'
     end
   end
-
- 
-
   
-
   def destroy
    
   end
