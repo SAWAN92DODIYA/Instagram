@@ -4,6 +4,14 @@ Rails.application.routes.draw do
 
   root "home#index"
   get "saved_posts/index"
+  
+  resources :home, only: [] do
+    collection do 
+      get :search_user
+      get :user_profile
+    end  
+  end 
+
 
   resources :notifications ,only: [:index]
   
@@ -35,16 +43,6 @@ Rails.application.routes.draw do
   resources :conversations,only: [:index, :new, :create] do
     resources :messages ,only: [:index, :create]
    end
-  
-
-  
-
-  
-  get "search/users" ,to: "home#search_user"
-  
-  
-  get "home/my_profile" ,to: "home#user_profile"
-  get "home" ,to: "home#index"
   
 
   get "up" => "rails/health#show", as: :rails_health_check

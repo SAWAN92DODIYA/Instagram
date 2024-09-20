@@ -1,38 +1,25 @@
-class PostNotifier < ApplicationNotifier
-  
+# To deliver this notification:
+#
+# CommentNotifier.with(record: @post, message: "New post").deliver(User.all)
+
+class CommentNotifier < ApplicationNotifier
+  # Add your delivery methods
+  #
   # deliver_by :email do |config|
   #   config.mailer = "UserMailer"
   #   config.method = "new_post"
-  #   config.params = ->(recipient) {{user:recipient}}
-  #   config.wait = 5.minutes 
   # end
-
+  
   def message
-    
-    "Create New Post"
+    "Create New Comment. "
   end 
 
   notification_methods do 
      def message
-      " #{recipient.profile_name} Add New Post  :  #{params[:foo]}" 
+      " #{recipient.profile_name} Add New Comment :  #{params[:foo]}" 
     end 
   end 
-
-  # deliver_by :database
-
-  # param :post, :commenter
-
-  # def message
-  #   "#{params[:commenter].profile_name} commented on your post."
-  # end
-
-  # def url
-  #   post_path(params[:post])
-  # end
-
-
-
-  #
+  
   # bulk_deliver_by :slack do |config|
   #   config.url = -> { Rails.application.credentials.slack_webhook_url }
   # end

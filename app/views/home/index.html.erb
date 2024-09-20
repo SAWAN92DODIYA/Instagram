@@ -28,7 +28,7 @@
                 <% end %>
             </div>
 
-
+            <h2>  <%= post.title %></h2>
             <% if post.image.image? %>
                 <%= image_tag post.image, style: "max-height:400px; width:100%" %>
             <% elsif post.image.video? %>
@@ -48,6 +48,7 @@
                     <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
                 <% end %>
             </div>
+            <p> <%= post.body %></p>
 
            <div class="post-actions">
     <h4>
