@@ -1,8 +1,38 @@
 .nav-link 
   {
-    text-style: bold;
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
   }
   nav
   {
     height: 100px;
+  }
+  .sidebar {
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 16px;
+  }
+  .sidebar li {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+
+  }
+  .inline-items {
+    display: flex;
+    align-items: center;
+  }
+  .inline-items i {
+    margin-right: 5px;
   }

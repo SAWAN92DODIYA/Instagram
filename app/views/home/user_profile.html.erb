@@ -4,25 +4,29 @@
     <title>Page Title</title>
     <%= stylesheet_link_tag "home" %>
     <%= javascript_include_tag 'slideshow' %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
 <body>
 
-    <div class="profile-container">
-        <div id="profile_pic">
-            <% if current_user.profile_pic.attached? %>
-                <%= image_tag current_user.profile_pic, class: "profile-pic" %>
-            <% end %>
-        </div>
-        <h1 id="profile_name"><%= current_user.profile_name %></h1>
-    </div>
-    
-    <%= link_to "Followers: #{current_user.followers.count}", all_followers_user_follows_path(current_user) %>
-    <%= link_to "Following: #{current_user.followings.count}", all_followed_user_follows_path(current_user) %>
-
+   
     <div id="parent_div">
         <div id="child_div">
-
-            <% @posts.each do |post| %>
+            <div class="profile-container">
+                <div id="profile_pic">
+                    <% if current_user.profile_pic.attached? %>
+                        <%= image_tag current_user.profile_pic, class: "profile-pic" %>
+                    <% end %>
+                </div>
+                <h1 id="profile_name"><%= current_user.profile_name %></h1>
+                 <h3> <i class='fas fa-calendar-alt'></i><%= @days_since_created %> </h3>
+            </div>
+            
+            <%= link_to "Followers: #{current_user.followers.count}", all_followers_user_follows_path(current_user) %>
+            <%= link_to "Following: #{current_user.followings.count}", all_followed_user_follows_path(current_user) %>
+          
+              <hr class="custom-hr">
+           <% @posts.each do |post| %>
 
                 <h2>  <%= post.title %></h2>
                 <% if post.image.image? %>
@@ -48,9 +52,13 @@
                 <h4>
                     <% like = current_user.likes.find_by(post: post) %>
                     <% if like && like.like %>
-                        <%= button_to 'Unlike', post_likes_path(post), data: { turbo_method: "post" } %>
+                        <%= button_to  post_likes_path(post), data: { turbo_method: "post" } ,class: "btn-icon-like" do %>
+                        <i class='fas fa-heart' ></i>
+                        <%end %>
                     <% else %>
-                        <%= button_to 'Like', post_likes_path(post), data: { turbo_method: "post" } %>
+                         <%= button_to  post_likes_path(post), data: { turbo_method: "post" } ,class: "btn-iconfg" do %>
+                        <i class='far fa-heart' ></i>
+                        <%end %>
                     <% end %>
 
                     <%= link_to "Likes: #{post.likes.where(like: true).count}", post_likes_path(post), data: { turbo_method: "get" } %>
@@ -70,8 +78,17 @@
                 </div>
 
                 <h4><%= link_to "Comments: #{post.comments.count}", post_comments_path(post), data: { turbo_method: "get" } %></h4>
-               <%= button_to 'Delete', post_path(post), method: :delete, data: { turbo_confirm: "Are you sure?" } %>
-             
+            
+
+              <%= button_to post_path(post), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn-icon-delete" do %>
+                 <i class="material-icons">delete</i>
+                <% end %>
+
+          
+                <%= button_to edit_post_path(post), method: :get, class: "btn btn-primary" do %>
+                  <i class="far fa-edit"></i>
+                <% end %>
+
 
                 </div>
                  <hr class="custom-hr">

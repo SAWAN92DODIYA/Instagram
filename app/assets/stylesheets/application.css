@@ -1,4 +1,10 @@
 .navbar_link:hover
 {
-        color: blueviolet;
+  color: blueviolet;
 }
+.main
+ {
+  margin-left: 300px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+ }
+      

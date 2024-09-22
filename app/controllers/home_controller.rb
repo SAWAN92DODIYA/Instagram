@@ -8,8 +8,10 @@ class HomeController < ApplicationController
   end
 
   def user_profile 
+    @days_since_created = (Date.today - current_user.created_at.to_date).to_i
     @user = User.find(current_user.id)
     @posts = @user.posts.all.order(created_at: :desc)
+
   end
 
   def search_user
