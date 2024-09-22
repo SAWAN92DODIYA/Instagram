@@ -3,6 +3,8 @@
 <head>
     <title>Page Title</title>
     <%= stylesheet_link_tag "all_comments" %>
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
 <body>
     <div id="parent_id">
@@ -17,9 +19,14 @@
                             <% end %>
                         </div>
                         <h4 id="profile_name"><%= User.find(comment.user_id).profile_name %></h4>
-                        
+                        <% if User.find(comment.user_id) == current_user %>
+                            <%= button_to post_comment_path(comment.post_id, comment.id), method: :delete, data: { turbo_confirm: "Are you sure?", turbo: false }, class: "btn-icon-delete" do %>
+                                <i class="material-icons">delete</i>
+                            <% end %>
+                        <% end %>
                     </div>
                     <p><%= comment.body %></p>
+                 
                 <% end %>
             </div>
         </div>

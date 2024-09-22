@@ -65,3 +65,15 @@
   width: 100%;
   margin: 10px 0;
 }
+.btn-icon-delete
+{
+ 
+  color: rgb(49, 5, 5);
+}
+
+.btn-icon-like
+{
+
+  color:red;
+
+}

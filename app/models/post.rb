@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :comments ,dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :saved_posts
+  has_many :saved_posts,dependent: :destroy
   has_many :notification_mentions, as: :record, dependent: :destroy, class_name: "Noticed::Event"
   validates :title,:body, presence: true
   validate :image_or_pictures_present

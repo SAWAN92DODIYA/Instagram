@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post , only: %i[ destroy]
+  before_action :set_post , only: %i[ destroy  edit  update]
 
   def new
     @post = Post.new
@@ -17,9 +17,21 @@ class PostsController < ApplicationController
 
  def destroy
     if @post.destroy!
-    redirect_to home_my_profile_path
-   end
+     redirect_to user_profile_home_index_path
+    end
   end
+
+  def edit 
+
+  end 
+
+  def update 
+    if @post.update(post_params)
+    redirect_to user_profile_home_index_path
+    else 
+      render :edit, status: :unprocessable_entity
+    end 
+  end 
 
   private 
 
