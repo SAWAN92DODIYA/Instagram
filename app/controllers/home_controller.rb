@@ -7,8 +7,6 @@ class HomeController < ApplicationController
     @posts = Post.where(user_id: user_ids).order(created_at: :desc)
   end
 
- 
-  
   def user_profile 
     @user = User.find(current_user.id)
     @posts = @user.posts.all.order(created_at: :desc)
