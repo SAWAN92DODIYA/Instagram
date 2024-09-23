@@ -16,13 +16,14 @@ class PostsController < ApplicationController
   end
 
  def destroy
+    authorize! :destroy, @post
     if @post.destroy!
      redirect_to user_profile_home_index_path
     end
   end
 
   def edit 
-
+    authorize! :update, @post
   end 
 
   def update 

@@ -70,7 +70,7 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
                         <%= form_with model: [post, post.comments.build] do |form| %>
-                            <li><%= form.text_field :body %></li>
+                            <li><%= form.text_field :body,placeholder: "Add a comment..."  %></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><%= form.submit %></li>
                         <% end %>

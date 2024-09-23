@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource 
   def index
     @comments = Post.find(params[:post_id]).comments
   end
@@ -16,6 +18,7 @@ class CommentsController < ApplicationController
   end
   
   def destroy
+    authorize! :destroy, @comment 
     comment = Comment.find(params[:id])
     if comment.destroy!
       redirect_to post_comments_path(params[:post_id])
