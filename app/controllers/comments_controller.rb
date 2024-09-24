@@ -10,12 +10,13 @@ class CommentsController < ApplicationController
     @comment = @post.comments.new(comment_params)
     @comment.user = current_user
 
-    if @comment.save
+  if @comment.save
       redirect_to root_path, notice: 'Comment was successfully created.'
     else
       redirect_to root_path, alert: 'There was an error saving your comment.'
     end
   end
+
   
   def destroy
     authorize! :destroy, @comment 

@@ -1,4 +1,6 @@
 class SavedPostsController < ApplicationController
+  load_and_authorize_resource 
+
   def index
     @posts = current_user.saved_posts.includes(:post).map(&:post) 
   end
