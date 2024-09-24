@@ -4,7 +4,8 @@ class HomeController < ApplicationController
   def index
     user_ids = current_user.followings.pluck(:id) + current_user.followers.pluck(:id)
     user_ids << current_user.id
-    @posts = Post.where(user_id: user_ids).order(created_at: :desc)
+    @posts = Post.where(user_id: user_ids).includes(:user).order(created_at: :desc)
+
   end
 
   def user_profile 
@@ -22,6 +23,4 @@ class HomeController < ApplicationController
         flash[:errors] = "We Couldn't find your request."
     end 
   end 
-
- 
 end 

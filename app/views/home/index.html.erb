@@ -12,17 +12,17 @@
             <% @posts.each do |post| %>
             <div class="profile-container">
                 <div id="profile_pic">
-                    <% if User.find(post.user_id).profile_pic.attached? %>
-                        <%= image_tag User.find(post.user_id).profile_pic, class: "profile-pic" %>
+                    <% if post.user.profile_pic.attached? %>
+                        <%= image_tag post.user.profile_pic, class: "profile-pic" %>
                     <% end %>
                 </div>
 
                 <h4 id="profile_name">
-                    <%= User.find(post.user_id).profile_name %>
+                    <%= post.user.profile_name %>
                 </h4>
 
                 <% unless current_user.id == post.user.id %>
-                    <% if current_user.following?(User.find(post.user.id)) %>
+                    <% if current_user.following?(post.user) %>
                         <%= link_to 'Unfollow', destroy_followed_user_follows_path(user_id: post.user.id), remote: true, data: { turbo_method: :delete }, class: "action-link" %>
                     <% else %>
                         <%= link_to 'Follow', create_followed_user_follows_path(user_id: post.user.id), remote: true, data: { turbo_method: :post }, class: "action-link" %>

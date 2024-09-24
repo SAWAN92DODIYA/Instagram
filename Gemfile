@@ -22,6 +22,7 @@ gem "jbuilder"
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
@@ -54,6 +55,7 @@ group :development do
 
   # Highlight the fine-grained location where an error occurred [https://github.com/ruby/error_highlight]
   gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
+  gem 'bullet'
 
 end
 
@@ -75,3 +77,4 @@ gem 'sassc'
 gem "omniauth"
 gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection"
+

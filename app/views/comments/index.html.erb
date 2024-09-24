@@ -14,12 +14,12 @@
                 <% @comments.each do |comment| %>
                     <div class="profile-container">
                         <div id="profile_pic">
-                            <% if User.find(comment.user_id).profile_pic.attached? %>
-                                <%= image_tag User.find(comment.user_id).profile_pic, class: "profile-pic" %>
+                            <% if comment.user.profile_pic.attached? %>
+                                <%= image_tag comment.user.profile_pic, class: "profile-pic" %>
                             <% end %>
                         </div>
-                        <h4 id="profile_name"><%= User.find(comment.user_id).profile_name %></h4>
-                        <% if User.find(comment.user_id) == current_user %>
+                        <h4 id="profile_name"><%= comment.user.profile_name %></h4>
+                        <% if comment.user == current_user %>
                             <%= button_to post_comment_path(comment.post_id, comment.id), method: :delete, data: { turbo_confirm: "Are you sure?", turbo: false }, class: "btn-icon-delete" do %>
                                 <i class="material-icons">delete</i>
                             <% end %>
