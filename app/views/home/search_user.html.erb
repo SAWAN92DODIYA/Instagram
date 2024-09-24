@@ -1,132 +1,118 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Title of the document</title>
+  <title>Title of the document</title>
   <%= stylesheet_link_tag "home" %>
   <%= javascript_include_tag 'slideshow' %>
 </head>
 <body>
+  <div>
     <div>
-        <div>
-            <% if @users.present? %>
-              <ul>
-                <% @users.each do |user|%>
-                  <li>
-                    <div class="profile-container">
-                    <div id="profile_pic">
-                        <% if user.profile_pic.attached? %>
-                            <%= image_tag user.profile_pic, class: "profile-pic" %>
-                        <% end %>
-                    </div>
-
-                    <h1 id="profile_name"><%= user.profile_name %></h1>
-                    <% unless current_user == user %>
-                        <% if current_user.following?(user) %>
-                            <%= link_to 'Unfollow', destroy_followed_user_follows_path(user_id: user.id), remote: true, data: { turbo_method: :delete }, class: "action-link" %>
-                        <% else %>
-                            <%= link_to 'Follow', create_followed_user_follows_path(user_id: user.id), remote: true, data: { turbo_method: :post }, class: "action-link" %>
-                        <% end %>
-                    <% end %>
-
-                    </div>
-                      </li>
-                <% end %>
-                 </ul>
-            <% elsif  @posts.present? %>
-
-            <div id="parent_div">
-        <div id="child_div">
-            <% @posts.each do |post| %>
-            <div class="profile-container">
+      <% if @users.present? %>
+        <ul>
+          <% @users.each do |user| %>
+            <li>
+              <div class="profile-container">
                 <div id="profile_pic">
-                    <% if User.find(post.user_id).profile_pic.attached? %>
-                        <%= image_tag User.find(post.user_id).profile_pic, class: "profile-pic" %>
-                    <% end %>
+                  <% if user.profile_pic.attached? %>
+                    <%= image_tag user.profile_pic, class: "profile-pic" %>
+                  <% end %>
+                </div>
+
+                <h1 id="profile_name"><%= user.profile_name %></h1>
+                
+                <% unless current_user == user %>
+                  <% if current_user.following?(user) %>
+                    <%= link_to 'Unfollow', destroy_followed_user_follows_path(user_id: user.id), remote: true, data: { turbo_method: :delete }, class: "action-link" %>
+                  <% else %>
+                    <%= link_to 'Follow', create_followed_user_follows_path(user_id: user.id), remote: true, data: { turbo_method: :post }, class: "action-link" %>
+                  <% end %>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      
+      <% elsif @posts.present? %>
+        <div id="parent_div">
+          <div id="child_div">
+            <% @posts.each do |post| %>
+              <div class="profile-container">
+                <div id="profile_pic">
+                  <% if User.find(post.user_id).profile_pic.attached? %>
+                    <%= image_tag User.find(post.user_id).profile_pic, class: "profile-pic" %>
+                  <% end %>
                 </div>
 
                 <h4 id="profile_name"><%= User.find(post.user_id).profile_name %></h4>
-
-                 <% unless current_user.id == post.user.id %>
-                    <% if current_user.following?(User.find(post.user.id)) %>
-                        <%= link_to 'Unfollow', destroy_followed_user_follows_path(user_id: post.user.id), remote: true, data: { turbo_method: :delete }, class: "action-link" %>
-                    <% else %>
-                        <%= link_to 'Follow', create_followed_user_follows_path(user_id: post.user.id), remote: true, data: { turbo_method: :post }, class: "action-link" %>
-                    <% end %>
+                
+                <% unless current_user.id == post.user.id %>
+                  <% if current_user.following?(User.find(post.user.id)) %>
+                    <%= link_to 'Unfollow', destroy_followed_user_follows_path(user_id: post.user.id), remote: true, data: { turbo_method: :delete }, class: "action-link" %>
+                  <% else %>
+                    <%= link_to 'Follow', create_followed_user_follows_path(user_id: post.user.id), remote: true, data: { turbo_method: :post }, class: "action-link" %>
+                  <% end %>
                 <% end %>
-            </div>
+              </div>
 
-
-            <% if post.image.image? %>
+              <% if post.image.image? %>
                 <%= image_tag post.image, style: "max-height:400px; width:100%" %>
-            <% elsif post.image.video? %>
+              <% elsif post.image.video? %>
                 <%= video_tag post.image, controls: true %>
-            <% end %>
-            
+              <% end %>
 
-            <div class="w3-content w3-display-container">
+              <div class="w3-content w3-display-container">
                 <% post.pictures.each_with_index do |picture, index| %>
-                    <% if picture.image? %>
-                        <img class="mySlides" src="<%= url_for(picture) %>" style="width:100%; display:none;" />
-                    <% end %>
+                  <% if picture.image? %>
+                    <img class="mySlides" src="<%= url_for(picture) %>" style="width:100%; display:none;" />
+                  <% end %>
                 <% end %>
 
                 <% if post.pictures.count > 1 %>
-                    <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-                    <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+                  <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
                 <% end %>
-            </div>
+              </div>
 
-           <div class="post-actions">
-    <h4>
-        <% like = current_user.likes.find_by(post: post) %>
-        <% if like && like.like %>
-            <%= button_to 'Unlike', post_likes_path(post), data: { turbo_method: "post" }, class: "action-button" %>
-        <% else %>
-            <%= button_to 'Like', post_likes_path(post), data: { turbo_method: "post" }, class: "action-button" %>
-        <% end %>
+              <div class="post-actions">
+                <h4>
+                  <% like = current_user.likes.find_by(post: post) %>
+                  <% if like && like.like %>
+                    <%= button_to 'Unlike', post_likes_path(post), data: { turbo_method: "post" }, class: "action-button" %>
+                  <% else %>
+                    <%= button_to 'Like', post_likes_path(post), data: { turbo_method: "post" }, class: "action-button" %>
+                  <% end %>
 
-        <%= link_to "Likes: #{post.likes.where(like: true).count}", post_likes_path(post), data: { turbo_method: "get" }, class: "action-link" %>
-    </h4>
+                  <%= link_to "Likes: #{post.likes.where(like: true).count}", post_likes_path(post), data: { turbo_method: "get" }, class: "action-link" %>
+                </h4>
 
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle action-button" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-            Create Comment
-        </button>
-        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-            <%= form_with model: [post, post.comments.build] do |form| %>
-                <li><%= form.text_field :body %></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><%= form.submit %></li>
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle action-button" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                    Create Comment
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                    <%= form_with model: [post, post.comments.build] do |form| %>
+                      <li><%= form.text_field :body %></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><%= form.submit %></li>
+                    <% end %>
+                  </ul>
+                </div>
+
+                <h4>
+                  <%= link_to "Comments: #{post.comments.count}", post_comments_path(post), data: { turbo_method: "get" }, class: "action-link" %>
+                </h4>
+
+                <%= button_to 'Save', post_saved_posts_path(post), data: { turbo_method: "post" }, class: "action-button" %>
+              </div>
+              <hr class="custom-hr">
             <% end %>
-        </ul>
-    </div>
-
-    <h4>
-        <%= link_to "Comments: #{post.comments.count}", post_comments_path(post), data: { turbo_method: "get" }, class: "action-link" %>
-    </h4>
-
-   
-
-    <%= button_to 'Save', post_saved_posts_path(post), data: { turbo_method: "post" }, class: "action-button" %>
-    </div>
-    <hr class="custom-hr">
-
-    <% end %>
-       
+          </div>
         </div>
+      <% else %>
+        <h3><%= flash[:errors] %></h3>
+      <% end %>
     </div>
-    
-
-
-            <% else %>
-                <h3><%= flash[:errors]%></h3>
-            <% end %>
-        </div>
-    </div>
+  </div>
 </body>
-
 </html>
-
-
-
- 
