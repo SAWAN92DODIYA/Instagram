@@ -11,33 +11,34 @@
       <h1 class= "post_heading">New Post</h1>
    
     <%= form_with model: @post  do |form| %>
-    <div>
-      <%= form.label :title %><br>
-      <%= form.text_field :title %>
-    </div>
+        <div>
+          <%= form.label :title %><br>
+          <%= form.text_field :title %>
+        </div>
 
-    <div>
-      <%= form.label :body %><br>
-      <%= form.text_area :body %><br>
-    </div>
+        <div>
+          <%= form.label :body %><br>
+          <%= form.text_area :body %><br>
+        </div>
 
-    <div>
-      <%= form.label :image  %><br>
-      <%= form.file_field :image  %><br>
-    </div>
+        <div>
+          <%= form.label :image  %><br>
+          <%= form.file_field :image  %><br>
+        </div>
 
-    <div>
-      <%= form.label :pictures %><br>
-      <%= form.file_field :pictures, multiple: true %><br>
-    </div>
+        <div>
+          <%= form.label :pictures %><br>
+          <%= form.file_field :pictures, multiple: true %><br>
+        </div>
 
-    <div id="submit_button">
-      <%= form.submit "Create Post"%>
-    </div>
-     </div>
+        <div id="submit_button">
+          <%= form.submit "Create Post"%>
+        </div>
+        </div>
 
-<% end %>
+   <% end %>
 
   </div>
 </body>
 </html>
+

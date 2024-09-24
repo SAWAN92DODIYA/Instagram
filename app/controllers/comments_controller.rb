@@ -6,17 +6,15 @@ class CommentsController < ApplicationController
   end
 
   def create
-    post = Post.find(params[:post_id])
-    comment = post.comments.new(comment_params)
-    comment.user = current_user
-   
+    comment = current_user.comments.new(comment_params)
+    comment.post_id = params[:post_id]
+
     if comment.save
         redirect_to request.referer, notice: "Comment was successfully created."
     else
         redirect_to root_path, alert: "There was an error saving your comment."
     end
- end
-
+  end
 
   def destroy
     authorize! :destroy, @comment

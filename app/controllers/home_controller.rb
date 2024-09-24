@@ -4,14 +4,13 @@ class HomeController < ApplicationController
   def index
     user_ids = current_user.followings.pluck(:id) + current_user.followers.pluck(:id)
     user_ids << current_user.id
-    @posts = Post.where(user_id: user_ids).includes(:user).order(created_at: :desc)
+    @posts = Post.where(user_id: user_ids.uniq).includes(:user).order(created_at: :desc)
 
   end
 
   def user_profile 
     @days_since_created = (Date.today - current_user.created_at.to_date).to_i
-    @user = User.find(current_user.id)
-    @posts = @user.posts.all.order(created_at: :desc)
+    @posts = current_user.posts.all.order(created_at: :desc)
 
   end
 

@@ -10,93 +10,88 @@
     <div id="parent_div">
         <div id="child_div">
             <% @posts.each do |post| %>
-            <div class="profile-container">
-                <div id="profile_pic">
-                    <% if post.user.profile_pic.attached? %>
-                        <%= image_tag post.user.profile_pic, class: "profile-pic" %>
+                <div class="profile-container">
+                    <div id="profile_pic">
+                        <% if post.user.profile_pic.attached? %>
+                            <%= image_tag post.user.profile_pic, class: "profile-pic" %>
+                        <% end %>
+                    </div>
+
+                    <h4 id="profile_name"><%= post.user.profile_name %></h4>
+
+                    <% unless current_user.id == post.user.id %>
+                        <% if current_user.following?(post.user) %>
+                            <%= link_to 'Unfollow', destroy_followed_user_follows_path(user_id: post.user.id), remote: true, data: { turbo_method: :delete }, class: "action-link" %>
+                        <% else %>
+                            <%= link_to 'Follow', create_followed_user_follows_path(user_id: post.user.id), remote: true, data: { turbo_method: :post }, class: "action-link" %>
+                        <% end %>
                     <% end %>
                 </div>
 
-                <h4 id="profile_name">
-                    <%= post.user.profile_name %>
-                </h4>
+                <h2><%= post.title %></h2>
 
-                <% unless current_user.id == post.user.id %>
-                    <% if current_user.following?(post.user) %>
-                        <%= link_to 'Unfollow', destroy_followed_user_follows_path(user_id: post.user.id), remote: true, data: { turbo_method: :delete }, class: "action-link" %>
-                    <% else %>
-                        <%= link_to 'Follow', create_followed_user_follows_path(user_id: post.user.id), remote: true, data: { turbo_method: :post }, class: "action-link" %>
-                    <% end %>
-                <% end %>
-            </div>
-
-            <h2><%= post.title %></h2>
-
-            <% if post.image.image? %>
-                <%= image_tag post.image, style: "max-height:400px; width:100%" %>
-            <% elsif post.image.video? %>
-                <%= video_tag post.image, controls: true %>
-            <% end %>
-
-            <div class="w3-content w3-display-container">
-                <% post.pictures.each_with_index do |picture, index| %>
-                    <% if picture.image? %>
-                        <img class="mySlides" src="<%= url_for(picture) %>" style="width:100%; display:none;" />
-                    <% end %>
+                <% if post.image.image? %>
+                    <%= image_tag post.image, style: "max-height:400px; width:100%" %>
+                <% elsif post.image.video? %>
+                    <%= video_tag post.image, controls: true %>
                 <% end %>
 
-                <% if post.pictures.count > 1 %>
-                    <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-                    <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
-                <% end %>
-            </div>
-
-            <p><%= post.body %></p>
-
-            <div class="post-actions">
-                <h4>
-                    <% like = current_user.likes.find_by(post: post) %>
-                    <% if like && like.like %>
-                        <%= button_to post_likes_path(post), data: { turbo_method: "post" }, class: "btn-icon-like" do %>
-                            <i class='fas fa-heart'></i>
-                        <% end %>
-                    <% else %>
-                        <%= button_to post_likes_path(post), data: { turbo_method: "post" }, class: "btn-iconfg" do %>
-                            <i class='far fa-heart'></i>
+                <div class="w3-content w3-display-container">
+                    <% post.pictures.each_with_index do |picture, index| %>
+                        <% if picture.image? %>
+                            <img class="mySlides" src="<%= url_for(picture) %>" style="width:100%; display:none;" />
                         <% end %>
                     <% end %>
 
-                    <%= link_to "Likes: #{post.likes.where(like: true).count}", post_likes_path(post), data: { turbo_method: "get" }, class: "action-link" %>
-                </h4>
-
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle action-button" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                        Create Comment
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                        <%= form_with model: [post, post.comments.build] do |form| %>
-                            <li>
-                                <%= form.text_field :body, placeholder: "Add a comment..." %>
-                            </li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><%= form.submit %></li>
-                        <% end %>
-                    </ul>
+                    <% if post.pictures.count > 1 %>
+                        <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                        <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+                    <% end %>
                 </div>
 
-                <h4>
-                    <%= link_to "Comments: #{post.comments.count}", post_comments_path(post), data: { turbo_method: "get" }, class: "action-link" %>
-                </h4>
+                <p><%= post.body %></p>
 
-                <% if current_user.saved_posts.where(post_id: post.id).present? %>
-                    <%= button_to "Delete Save Post", post_saved_posts_path(post), method: :delete, data: { turbo: false }, class: 'delete-button' %>
-                <% else %>
-                    <%= button_to 'Save', post_saved_posts_path(post), data: { turbo_method: "post" }, class: "action-button" %>
-                <% end %>
-            </div>
+                <div class="post-actions">
+                    <h4>
+                        <% like = current_user.likes.find_by(post: post) %>
+                        <% if like && like.like %>
+                            <%= button_to post_likes_path(post), data: { turbo_method: "post" }, class: "btn-icon-like" do %>
+                                <i class='fas fa-heart'></i>
+                            <% end %>
+                        <% else %>
+                            <%= button_to post_likes_path(post), data: { turbo_method: "post" }, class: "btn-iconfg" do %>
+                                <i class='far fa-heart'></i>
+                            <% end %>
+                        <% end %>
 
-            <hr class="custom-hr">
+                        <%= link_to "Likes: #{post.likes.where(like: true).count}", post_likes_path(post), data: { turbo_method: "get" }, class: "action-link" %>
+                    </h4>
 
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle action-button" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                            Create Comment
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                            <%= form_with model: [post, post.comments.build] do |form| %>
+                                <li><%= form.text_field :body, placeholder: "Add a comment..." %></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><%= form.submit %></li>
+                            <% end %>
+                        </ul>
+                    </div>
+
+                    <h4>
+                        <%= link_to "Comments: #{post.comments.count}", post_comments_path(post), data: { turbo_method: "get" }, class: "action-link" %>
+                    </h4>
+
+                    <% if current_user.saved_posts.where(post_id: post.id).present? %>
+                        <%= button_to "Delete Save Post", post_saved_posts_path(post), method: :delete, data: { turbo: false }, class: 'delete-button' %>
+                    <% else %>
+                        <%= button_to 'Save', post_saved_posts_path(post), data: { turbo_method: "post" }, class: "action-button" %>
+                    <% end %>
+                </div>
+
+                <hr class="custom-hr">
             <% end %>
         </div>
     </div>

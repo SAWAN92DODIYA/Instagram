@@ -8,8 +8,6 @@ class Post < ApplicationRecord
   validates :title,:body, presence: true
   validate :image_or_pictures_present
 
-  
-  
   def self.ransackable_attributes(_auth_object = nil)
     %w[user_id title body] 
   end
