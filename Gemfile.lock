@@ -130,6 +130,11 @@ GEM
     drb (2.2.1)
     error_highlight (0.6.0)
     erubi (1.13.0)
+    factory_bot (6.5.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.4.3)
+      factory_bot (~> 6.4)
+      railties (>= 5.0.0)
     faraday (2.11.0)
       faraday-net_http (>= 2.0, < 3.4)
       logger
@@ -297,6 +302,10 @@ GEM
       activesupport (= 7.2.1)
       bundler (>= 1.15.0)
       railties (= 7.2.1)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.2.0)
       activesupport (>= 5.0.0)
       minitest
@@ -450,6 +459,7 @@ DEPENDENCIES
   debug
   devise (~> 4.9)
   error_highlight (>= 0.4.0)
+  factory_bot_rails
   importmap-rails
   jbuilder
   letter_opener_web
@@ -459,6 +469,7 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.2.1)
+  rails-controller-testing
   rspec-rails
   rubocop-rails-omakase
   sassc
