@@ -1,6 +1,8 @@
 FactoryBot.define do
     factory :post do
-      title { 'test title' }
+      title { 'text title'}
       body { 'test body' }
+      user_id {1 }
+      
     end
   end

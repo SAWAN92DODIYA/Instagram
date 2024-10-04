@@ -3,7 +3,7 @@ class ConversationsController < ApplicationController
   def index
    @users = (current_user.followings + current_user.followers).uniq
    @conversations = Conversation.all
-   end
+  end
 
   def create
    if Conversation.between(params[:sender_id],params[:recipient_id])

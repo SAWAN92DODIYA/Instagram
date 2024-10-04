@@ -47,6 +47,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'rails-controller-testing'
+   gem 'bullet'
   
 end
 
@@ -57,7 +58,7 @@ group :development do
 
   # Highlight the fine-grained location where an error occurred [https://github.com/ruby/error_highlight]
   gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
-  gem 'bullet'
+ 
 
 end
 
