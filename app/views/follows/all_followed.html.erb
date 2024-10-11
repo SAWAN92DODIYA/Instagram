@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Title of the document</title>
+  <title><%= @user.profile_name %>'s Followers</title>
   <%= stylesheet_link_tag "home" %>
+  <%= stylesheet_link_tag "follow" %>
 </head>
 
 <body>
   <h1><strong>Followed: <%= @followed_users.count %></strong></h1>
-
   <h1><%= @user.profile_name %>'s Followers</h1>
 
   <ul>
@@ -17,6 +17,8 @@
           <div id="profile_pic">
             <% if followed.profile_pic.attached? %>
               <%= image_tag followed.profile_pic, class: "profile-pic" %>
+            <% else %>
+              <img src="default_profile_pic.png" class="profile-pic" alt="Default Profile Picture"> <!-- Default image if no profile pic -->
             <% end %>
           </div>
           <h1 id="profile_name"><%= followed.profile_name %></h1>
