@@ -12,7 +12,7 @@ class FollowsController < ApplicationController
 
   def create_followed
     current_user.follow(@user)
-    redirect_to root_path, 
+    redirect_to root_path 
   end
 
   def destroy_followed
