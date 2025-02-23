@@ -1,29 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Title of the document</title>
-  <%= stylesheet_link_tag "home" %>
-  <%= stylesheet_link_tag "follow" %>
-</head>
 
-<body>
-  <h1><strong>Follower: <%= @followers.count %></strong></h1>
+<h1><strong>Follower: <%= @followers.count %></strong></h1>
 
-  <h1><%= @user.profile_name %>'s Followers</h1>
+<h1><%= @user.profile_name %>'s Followers</h1>
 
-  <ul>
-    <% @followers.each do |follower| %>
-      <li>
-        <div class="profile-container">
-          <div id="profile_pic">
-            <% if follower.profile_pic.attached? %>
-              <%= image_tag follower.profile_pic, class: "profile-pic" %>
-            <% end %>
-          </div>
-          <h1 id="profile_name"><%= follower.profile_name %></h1>
+<ul>
+  <% @followers.each do |follower| %>
+    <li>
+      <div class="profile-container">
+        <div id="profile_pic">
+          <% if follower.profile_pic.attached? %>
+            <%= image_tag follower.profile_pic, class: "profile-pic" %>
+          <% end %>
         </div>
-      </li>
-    <% end %>
-  </ul>
-</body>
-</html>
+        <h1 id="profile_name"><%= follower.profile_name %></h1>
+      </div>
+    </li>
+  <% end %>
+</ul>

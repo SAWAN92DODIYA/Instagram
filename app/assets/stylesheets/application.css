@@ -1,3 +1,23 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *= require 'home' 
+ *= require 'conversation'
+ *= require 'edit_profile'
+ *= require 'follow'
+ *= require 'heder'
+ *= require 'login'
+ *= require 'message'
+ *= require 'post_form'
+ *= require 'save_posts'
+ *= require 'signup'
+ *= require 'all_comments'
+ *= require 'all_likes'
+ *= require 'actiontext'
+ */
 .navbar_link:hover
 {
   color: blueviolet;
@@ -11,4 +31,3 @@
  {
   margin-left: 300px;
  }
-      
