@@ -1,40 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Contacts & Messages</title>
-    <%= stylesheet_link_tag "conversation" %>
-</head>
-<body>
-    <div class='ui segment'>
-        <h3>Messages</h3>
-        <div class='ui list'>
-            <% @conversations.each do |conversation| %>
-                <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
-                    <% if conversation.sender_id == current_user.id %>
-                        <% recipient = User.find(conversation.recipient_id) %>
-                    <% else %>
-                        <% recipient = User.find(conversation.sender_id) %>
-                    <% end %>
-                    <div class='item'>
-                        <%= link_to recipient.profile_name, conversation_messages_path(conversation) %>
-                    </div>
-                <% end %>
-            <% end %>
+<div class='ui segment'>
+  <h3>Messages</h3>
+  <div class='ui list'>
+    <% @conversations.each do |conversation| %>
+      <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+        <% recipient = conversation.sender_id == current_user.id ? User.find(conversation.recipient_id) : User.find(conversation.sender_id) %>
+        <div class='item'>
+          <%= link_to recipient.profile_name, conversation_messages_path(conversation) %>
         </div>
-    </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
 
-    <div class='ui segment'>
-        <h3>My Contacts</h3>
-        <div class='ui list'>
-            <% @users.each do |user| %>
-                <% if user.id != current_user.id %>
-                    <div class='item'>
-                        <span><%= user.profile_name %></span>
-                        <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: user.id), data: { turbo_method: :post }, class: 'contact-button' %>
-                    </div>
-                <% end %>
-            <% end %>
+<div class='ui segment'>
+  <h3>My Contacts</h3>
+  <div class='ui list'>
+    <% @users.each do |user| %>
+      <% if user.id != current_user.id %>
+        <div class='item'>
+          <span><%= user.profile_name %></span>
+          <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: user.id), 
+                      data: { turbo_method: :post }, class: 'contact-button' %>
         </div>
-    </div>
-</body>
-</html>
+      <% end %>
+    <% end %>
+  </div>
+</div>

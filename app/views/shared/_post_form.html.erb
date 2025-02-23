@@ -1,44 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Page Title</title>
-  <%= stylesheet_link_tag "post_form" %>
-</head>
-<body>
-  <div id="post_page">
 
-    <div class= "heding_post_form">
-      <h1 class= "post_heading">New Post</h1>
-   
-    <%= form_with model: @post  do |form| %>
-        <div>
-          <%= form.label :title %><br>
-          <%= form.text_field :title %>
-        </div>
+<div id="post_page">
 
-        <div>
-          <%= form.label :body %><br>
-          <%= form.text_area :body %><br>
-        </div>
+  <div class= "heding_post_form">
+    <h1 class= "post_heading">New Post</h1>
+  
+  <%= form_with model: @post  do |form| %>
+      <div>
+        <%= form.label :title %><br>
+        <%= form.text_field :title %>
+      </div>
 
-        <div>
-          <%= form.label :image  %><br>
-          <%= form.file_field :image  %><br>
-        </div>
+      <div>
+        <%= form.label :body %><br>
+        <%= form.text_area :body %><br>
+      </div>
 
-        <div>
-          <%= form.label :pictures %><br>
-          <%= form.file_field :pictures, multiple: true %><br>
-        </div>
+      <div>
+        <%= form.label :image  %><br>
+        <%= form.file_field :image  %><br>
+      </div>
 
-        <div id="submit_button">
-          <%= form.submit "Create Post"%>
-        </div>
-        </div>
+      <div>
+        <%= form.label :pictures %><br>
+        <%= form.file_field :pictures, multiple: true %><br>
+      </div>
 
-   <% end %>
+      <div id="submit_button">
+        <%= form.submit "Create Post"%>
+      </div>
+      </div>
 
-  </div>
-</body>
-</html>
+  <% end %>
+
+</div>
+
 
